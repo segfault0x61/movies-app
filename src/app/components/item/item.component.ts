@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IMovie } from '../../models/movie';
+import { IMAGES_SIZES } from '../../constants/images-sizes';
 
 @Component({
   selector: 'app-item',
@@ -8,6 +9,8 @@ import { IMovie } from '../../models/movie';
 })
 export class ItemComponent implements OnInit {
   @Input() itemData: IMovie | null = null;
+
+  readonly imagesSizes = IMAGES_SIZES;
 
   constructor() {}
 
