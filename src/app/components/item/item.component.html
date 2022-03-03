@@ -1,13 +1,16 @@
-<a class="item">
-  <div class="item-rating">
-    <i class="app-icon">star</i>
-    <span>6.6</span>/10
-  </div>
-  <div class="item-image">
-    <img
-      src="https:/image.tmdb.org/t/p/original/4gKxQIW91hOTELjY5lzjMbLoGxB.jpg"
-      alt=""
-    />
-  </div>
-  <div class="item-title">Movie Title</div>
-</a>
+<ng-container *ngIf="itemData">
+  <a class="item">
+    <div class="item-rating">
+      <i class="app-icon">star</i>
+      <span>{{ itemData.vote_average }}</span
+      >/10
+    </div>
+    <div class="item-image">
+      <img
+        [src]="'https:/image.tmdb.org/t/p/original/' + itemData.poster_path"
+        [alt]="itemData.title"
+      />
+    </div>
+    <div class="item-title">{{ itemData.title }}</div>
+  </a>
+</ng-container>
