@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IMovieDto } from '../models/movie';
+import { of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,9 +12,13 @@ export class MoviesService {
 
   constructor(private http: HttpClient) {}
 
-  getMovies(type: string = 'upcoming') {
-    return this.http.get<IMovieDto>(
-      `${this.baseUrl}/movie/${type}?api_key=${this.apiKey}`
-    );
+  getMovies(type: string = 'upcoming', count: number = 12) {
+    return this.http
+      .get<IMovieDto>(`${this.baseUrl}/movie/${type}?api_key=${this.apiKey}`)
+      .pipe(
+        switchMap((response) => {
+          return of(response.results.slice(0, count));
+        })
+      );
   }
 }
