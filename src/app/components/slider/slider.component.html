@@ -1,32 +1,27 @@
 <div class="slider">
-  <div class="slide">
+  <div class="slide" *ngFor="let item of items">
     <div class="slide-bg">
       <img
         class="slide-bg-image"
-        src="https://image.tmdb.org/t/p/original/tutaKitJJIaqZPyMz7rxrhb4Yxm.jpg"
+        [src]="'https://image.tmdb.org/t/p/original/' + item.backdrop_path"
         alt=""
       />
     </div>
     <div class="slide-pane">
-      <h2 class="name">Sing 2</h2>
+      <h2 class="name">{{ item.title }}</h2>
       <div class="meta">
         <div class="info">
           <span class="rating">
             <span class="app-icon">star</span
-            ><span class="rating-value">8.2</span><span>/10</span>
+            ><span class="rating-value">{{ item.vote_average }}</span
+            ><span>/10</span>
           </span>
-          <span>2071 Reviews</span>
-          <span>2021</span>
+          <span>{{ item.vote_count }}</span>
+          <span>{{ item.release_date | date: "yyyy" }}</span>
         </div>
       </div>
       <div class="desc mt-6">
-        Buster and his new cast now have their sights set on debuting a new show
-        at the Crystal Tower Theater in glamorous Redshore City. But with no
-        connections, he and his singers must sneak into the Crystal
-        Entertainment offices, run by the ruthless wolf mogul Jimmy Crystal,
-        where the gang pitches the ridiculous idea of casting the lion rock
-        legend Clay Calloway in their show. Buster must embark on a quest to
-        find the now-isolated Clay and persuade him to return to the stage.
+        {{ item.overview }}
       </div>
     </div>
   </div>
