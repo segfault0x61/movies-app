@@ -14,10 +14,24 @@ export class MoviesService {
 
   getMovies(type: string = 'upcoming', count: number = 12) {
     return this.http
-      .get<IMovieDto>(`${this.baseUrl}/movie/${type}?api_key=${this.apiKey}`)
+      .get<IMovieDto>(
+        `${this.baseUrl}/movie/${type}?language=en&api_key=${this.apiKey}`
+      )
       .pipe(
         switchMap((response) => {
           return of(response.results.slice(0, count));
+        })
+      );
+  }
+
+  searchMovies(page: number) {
+    return this.http
+      .get<IMovieDto>(
+        `${this.baseUrl}/movie/popular?page=${page}&language=en&api_key=${this.apiKey}`
+      )
+      .pipe(
+        switchMap((response) => {
+          return of(response.results);
         })
       );
   }
