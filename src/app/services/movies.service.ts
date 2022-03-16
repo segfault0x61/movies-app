@@ -7,7 +7,8 @@ import {
   IMovieImages,
   IMovieVideoDto,
 } from '../models/movie';
-import { of, switchMap } from 'rxjs';
+import { filter, map, of, switchMap } from 'rxjs';
+import { IGenresDto } from '../models/genre';
 
 @Injectable({
   providedIn: 'root',
@@ -56,6 +57,34 @@ export class MoviesService {
       .pipe(
         switchMap((response) => {
           return of(response.results);
+        })
+      );
+  }
+
+  getMoviesGenres() {
+    return this.http
+      .get<IGenresDto>(
+        `${this.baseUrl}/genre/movie/list?language=en&api_key=${this.apiKey}`
+      )
+      .pipe(
+        switchMap((response) => {
+          return of(response.genres);
+        })
+      );
+  }
+
+  getMoviesByGenre(genreId: number, page: number) {
+    return this.http
+      .get<IMovieDto>(
+        `${this.baseUrl}/discover/movie/?with_genres=${genreId}&language=en&include_adult=false&page=${page}&api_key=${this.apiKey}`
+      )
+      .pipe(
+        switchMap((response) => {
+          return of(
+            response.results.filter(
+              (result) => !result.original_title.toLowerCase().includes('porn')
+            )
+          );
         })
       );
   }
