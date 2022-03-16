@@ -5,7 +5,7 @@
         <img
           class="slide-bg-image"
           [src]="imagesSizes.large + item.backdrop_path"
-          alt=""
+          [alt]="item.title"
         />
       </div>
       <div class="slide-pane">
@@ -13,9 +13,9 @@
         <div class="meta">
           <div class="info">
             <span class="rating">
-              <span class="app-icon">star</span
-              ><span class="rating-value">{{ item.vote_average }}</span
-              ><span>/10</span>
+              <span class="app-icon">star</span>
+              <span class="rating-value">{{ item.vote_average }}</span>
+              <span>/10</span>
             </span>
             <span>{{ item.vote_count }}</span>
             <span>{{ item.release_date | date: "yyyy" }}</span>
