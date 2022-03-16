@@ -30,3 +30,13 @@ export interface IGenre {
   id: number;
   name: string;
 }
+
+export interface IMovieVideoDto {
+  id: number;
+  results: IMovieVideo[];
+}
+
+export interface IMovieVideo {
+  site: string;
+  key: string;
+}
