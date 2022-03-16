@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IMovieDto } from '../models/movie';
+import {
+  IMovie,
+  IMovieCredits,
+  IMovieDto,
+  IMovieImages,
+  IMovieVideoDto,
+} from '../models/movie';
 import { of, switchMap } from 'rxjs';
 
 @Injectable({
@@ -24,6 +30,12 @@ export class MoviesService {
       );
   }
 
+  getMovie(id: string) {
+    return this.http.get<IMovie>(
+      `${this.baseUrl}/movie/${id}?language=en&api_key=${this.apiKey}`
+    );
+  }
+
   searchMovies(page: number) {
     return this.http
       .get<IMovieDto>(
@@ -32,6 +44,42 @@ export class MoviesService {
       .pipe(
         switchMap((response) => {
           return of(response.results);
+        })
+      );
+  }
+
+  getMovieVideos(id: string) {
+    return this.http
+      .get<IMovieVideoDto>(
+        `${this.baseUrl}/movie/${id}/videos?language=en&api_key=${this.apiKey}`
+      )
+      .pipe(
+        switchMap((response) => {
+          return of(response.results);
+        })
+      );
+  }
+
+  getMovieImages(id: string) {
+    return this.http.get<IMovieImages>(
+      `${this.baseUrl}/movie/${id}/images?language=en&api_key=${this.apiKey}`
+    );
+  }
+
+  getMovieCredits(id: string) {
+    return this.http.get<IMovieCredits>(
+      `${this.baseUrl}/movie/${id}/credits?language=en&api_key=${this.apiKey}`
+    );
+  }
+
+  getMovieSimilar(id: string) {
+    return this.http
+      .get<IMovieDto>(
+        `${this.baseUrl}/movie/${id}/similar?api_key=${this.apiKey}`
+      )
+      .pipe(
+        switchMap((res) => {
+          return of(res.results.slice(0, 18));
         })
       );
   }

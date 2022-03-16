@@ -13,6 +13,10 @@ export interface IMovie {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  revenue: number;
+  runtime: number;
+  status: string;
+  genres: IGenre[];
 }
 
 export interface IMovieDto {
@@ -20,4 +24,32 @@ export interface IMovieDto {
   results: IMovie[];
   total_results: number;
   total_pages: number;
+}
+
+export interface IGenre {
+  id: number;
+  name: string;
+}
+
+export interface IMovieVideoDto {
+  id: number;
+  results: IMovieVideo[];
+}
+
+export interface IMovieVideo {
+  site: string;
+  key: string;
+}
+
+export interface IMovieImages {
+  backdrops: {
+    file_path: string;
+  }[];
+}
+
+export interface IMovieCredits {
+  cast: {
+    name: string;
+    profile_path: string;
+  }[];
 }
