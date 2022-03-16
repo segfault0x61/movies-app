@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IMovie } from '../../models/movie';
 import { MoviesService } from '../../services/movies.service';
+import { IMAGES_SIZES } from '../../constants/images-sizes';
 
 @Component({
   selector: 'app-movie',
@@ -10,6 +11,7 @@ import { MoviesService } from '../../services/movies.service';
 })
 export class MovieComponent implements OnInit {
   movie: IMovie | null = null;
+  imagesSizes = IMAGES_SIZES;
 
   constructor(
     private route: ActivatedRoute,
