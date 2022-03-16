@@ -46,3 +46,10 @@ export interface IMovieImages {
     file_path: string;
   }[];
 }
+
+export interface IMovieCredits {
+  cast: {
+    name: string;
+    profile_path: string;
+  }[];
+}

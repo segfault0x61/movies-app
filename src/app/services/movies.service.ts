@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   IMovie,
+  IMovieCredits,
   IMovieDto,
   IMovieImages,
   IMovieVideoDto,
@@ -63,5 +64,23 @@ export class MoviesService {
     return this.http.get<IMovieImages>(
       `${this.baseUrl}/movie/${id}/images?language=en&api_key=${this.apiKey}`
     );
+  }
+
+  getMovieCredits(id: string) {
+    return this.http.get<IMovieCredits>(
+      `${this.baseUrl}/movie/${id}/credits?language=en&api_key=${this.apiKey}`
+    );
+  }
+
+  getMovieSimilar(id: string) {
+    return this.http
+      .get<IMovieDto>(
+        `${this.baseUrl}/movie/${id}/similar?api_key=${this.apiKey}`
+      )
+      .pipe(
+        switchMap((res) => {
+          return of(res.results.slice(0, 18));
+        })
+      );
   }
 }
