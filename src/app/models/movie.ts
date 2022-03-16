@@ -40,3 +40,9 @@ export interface IMovieVideo {
   site: string;
   key: string;
 }
+
+export interface IMovieImages {
+  backdrops: {
+    file_path: string;
+  }[];
+}

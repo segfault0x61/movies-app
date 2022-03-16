@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IMovie, IMovieDto, IMovieVideoDto } from '../models/movie';
+import {
+  IMovie,
+  IMovieDto,
+  IMovieImages,
+  IMovieVideoDto,
+} from '../models/movie';
 import { of, switchMap } from 'rxjs';
 
 @Injectable({
@@ -52,5 +57,11 @@ export class MoviesService {
           return of(response.results);
         })
       );
+  }
+
+  getMovieImages(id: string) {
+    return this.http.get<IMovieImages>(
+      `${this.baseUrl}/movie/${id}/images?language=en&api_key=${this.apiKey}`
+    );
   }
 }
